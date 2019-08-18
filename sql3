@@ -1,0 +1,57 @@
+--create a report that includes: Employee id, lastname, department id and department names for all employees
+--department _od comes from both 
+--ON employees.Employee_id=departments.department_id; --> if we dont add this condition, it show every employee for every department
+SELECT  employee_id,last_name, employees.employee_id , department_name
+FROM employees  JOIN departments
+ON employees.Employee_id=departments.department_id;
+
+--Display department id and department name, city namefor all departments.
+--location_id comes from two table/from departments and locations
+—the common on location_id between them
+SELECT department_id,department_name,city
+FROM departments INNER JOIN locations
+ON departments.location_id = locations.location_id;
+
+--Display All cities , country names
+SELECT city, country_name
+FROM locations INNER JOIN countries
+ON locations.country_id=countries.country_id;
+--Display country_id, country name, region id , region name
+SELECT country_id, country_name,c.region_id, region_name
+FROM countries c INNER JOIN regions r
+ON c.region_id=r.region_id;
+
+--Employee id, lastname, department id, departement name,location id, city, country name.
+--for this querry we have to join  table.
+SELECT employee_id,last_name,e.department_id,department_name,d.location_id, city, country_name
+--at that point just emmployee have connection with department
+--we need to do kind of branchand follow common one
+FROM employees e JOIN departments d
+ON e.department_id=d.department_id
+JOIN locations l
+ON d.location_id = l.location_id
+JOIN countries c
+ON l.country_id=c.country_id;
+
+--Display Employee lastname, department id, department name for department that have employees and that does not have.
+SELECT last_name, d.department_id, department_name
+FROM employees e RIGHT OUTER JOIN departments d
+ON e.department_id=d.department_id;
+
+--Left OUTER JOIN
+SELECT last_name, d.department_id, department_name
+FROM employees e Left OUTER JOIN department 
+(—it gives us blue side now)
+
+--FULL OUTER JOIN
+SELECT last_name, d.department_id, department_name
+FROM employees e FULL OUTER JOIN departments d
+ON e.department_id=d.department_id;   
+(—it gives us grey and blue side now-matching or non matching)
+
+
+--Display employee lastname, manager id, managers last name
+--from employees/kind of copy same table and find from other table
+SELECT e1.last_name, e1.manager_id, e2.last_name
+FROM employees e1 JOIN employees e2
+ON e1.manager_id=e2.employee_id;
