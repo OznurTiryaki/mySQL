@@ -1,0 +1,117 @@
+
+--Show all employees whose salary is MORE than 4000 and less than 6000
+SELECT *
+FROM employees
+WHERE salary > 4000
+AND salary < 6000;
+
+
+--Show all employees whose salary is EQUAL OR MORE 4000 and less than or equal 6000
+SELECT *
+FROM employees
+WHERE salary BETWEEN 4000 AND 6000; 
+
+--Display all employee lastnames and job ids who are NOT sales represtatives-- <>
+--If you dont know the SA_REP check the job id's
+SELECT last_name, job_id
+From employees
+WHERE  job_id <> 'SA_REP';
+
+BETWEEN AND -> Between 2 values (inclusive)
+--List all employees who joined the company after or on jan 1 , 2001 and before or on jan 1 , 2004.--BETWEEN
+SELECT *
+FROM employees
+WHERE hire_date BETWEEN '01-JAN-01'
+AND '01-JAN-04’;
+
+--Show all employees who work in any one of these department id 90,60, 100, 130, 120——OR
+SELECT *
+FROM employees
+WHERE department_id = 90
+OR department_id = 60
+OR department_id = 100
+OR department_id = 130
+OR department_id = 120;
+
+--Show all employee who work as any of these jobs IT_PROG, SA_REP, FI_ACCOUNT,AD_VP  sort by job ids—IN
+The IN operator allows you to specify multiple values in a WHERE clause.
+The IN operator is a shorthand for multiple OR conditions.
+SELECT *
+FROM employees
+WHERE job_id IN ('IT_PROG','SA_REP','FI_ACCOUNT','AD_VP');
+
+
+--LIKE is used to do partial searches using wildcard
+--List all employees whose first name starts with N  --LIKE 'N%’
+--% means any character or no characters.
+SELECT *
+FROM employees
+WHERE first_name LIKE 'N%';
+
+--Show all employees whose last name ends with 'a'-- LIKE '%a'
+SELECT *
+FROM employees
+WHERE last_name LIKE '%a';
+
+--List all employees who started working in month of FEB.
+SELECT *
+FROM employees
+WHERE hire_date LIKE ‘%FEB%';
+
+--List all employees who started working in month of FEB Or in MARCH Or in APRIL
+SELECT *
+FROM employees
+WHERE hire_date LIKE '%FEB%'
+OR hire_date LIKE '%MAR%’
+OR hire_date LIKE '%APR%';
+
+--List all employees whose last name second letter is 'a' ---LIKE '_a%’
+-- _ MEANS ANY SINGLE CHARACTER /(YANI A 'DAN ONCE SADECE 1 HARF VAR ANLAMINDA
+SELECT *
+FROM employees
+WHERE last_name LIKE '_a%';
+
+--List all employees whose first name contains either a or e, or b
+--%a% means contains a-any where in name
+SELECT *
+FROM employees
+WHERE first_name LIKE '%a%'
+OR first_name LIKE '%e%'
+OR first_name LIKE '%b%'
+OR first_name LIKE '%A%'
+OR first_name LIKE '%B%'
+OR first_name LIKE '%E%'
+
+--Show all records whose last name contains 2 lowercase 'a's
+SELECT *
+FROM employees
+WHERE last_name LIKE '%a%%a%';
+
+--Show first 5 employees in company
+SELECT *
+FROM employees
+WHERE rownum <=5;
+--OR
+SELECT *
+FROM employees
+WHERE rownum between 0 and 5;
+
+--Show 7 top highest salaried employees
+SELECT *
+FROM employees
+WHERE rownum <=7
+ORDER BY salary desc;
+
+--Show all lastnames, salaries, and commissions
+SELECT last_name, salary, commission_pct
+FROM employees;
+
+--Show all employees who earn commission
+SELECT *
+FROM employees
+WHERE commission_pct IS NOT NULL;
+
+--Show all employees who do not earn any commission
+SELECT *
+FROM employees
+WHERE commission_pct IS NULL;
