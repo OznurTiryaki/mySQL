@@ -1,0 +1,56 @@
+--Display all tables/star represent all
+SELECT * 
+FROM countries;
+
+--Displaying data from specific column
+SELECT first_name, last_name, salary ,job_id
+FROM employees
+ORDER BY last_name;
+
+-- Display all lastname, emp ids, emails ORDER BY salary descending way
+SELECT first_name, last_name, salary ,job_id
+FROM employees
+ORDER BY salary desc;
+
+-- Display all lastname, and annual salary ORDER BY position 
+SELECT last_name , salary*12
+FROM employees
+ORDER BY 2 desc;
+
+--Display emp last name, and annual salary
+SELECT last_name, salary * 12 AS Annual
+FROM Employees
+ORDER BY 2;
+
+--Display empl lastname, job id, hourly, daily, weekly, monthly, yearly salaries and rename accordingly
+SELECT last_name,job_id, salary /160 as hourly, salary/20 as daily, salary/4 as weekly, salary as monthly, salary *12 as yearly
+FROM employees
+ORDER BY last_name;
+
+--Displaying Unique/non duplicated data: DISTINCT keyword removes duplicates.
+SELECT DISTINCT job_id
+FROM employees;
+
+--Concationation Operator in SQL: ||  --EllenAbel@gmail.com
+SELECT first_name || last_name || '@gmail.com' AS emails
+FROM employees;
+
+--If we add under score between them --Ellen_Abel@gmail.com
+SELECT first_name ||'_'|| last_name || '@gmail.com' AS emails
+FROM employees;
+
+--filtering result in SQL- Where keyword
+-- display last_name,salary only for people who earn less than 5000 monthly.
+SELECT last_name,salary 
+FROM employees
+WHERE salary < 5000;
+
+--Show all IT_programmers
+SELECT last_name
+FROM employees
+WHERE job_id = 'IT_PROG';
+
+--Tell me job id and department id of David Austin
+SELECT job_id, employees.department_id
+FROM employees
+WHERE first_name || last_name='DavidAustin’;
